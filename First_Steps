@@ -1,0 +1,61 @@
+(comment "La primera instalación de Clojure que realizo es Windows es Leiningen. Ocurre que para Windows hay un .bat que permite su instalación pero si es Windows 10 hay que hacer lo siguiente:")
+
+(comment 
+I was able to fix it by specifying the security protocol, see below. Please let me know if this is useful and I will submit it as a github PR.
+
+--- lein.bat.original   2018-04-09 11:27:07.549354500 +0100
++++ lein.bat    2018-04-09 11:28:43.442263400 +0100
+@@ -154,7 +154,7 @@
+ call powershell -? >nul 2>&1
+ if NOT ERRORLEVEL 0 goto TRY_WGET
+     set LAST_HTTP_CLIENT=powershell
+-    powershell -Command "& {param($a,$f) $client = New-Object System.Net.WebClient;  $client.Proxy.Credentials =[System.Net.CredentialCache]::DefaultNetworkCredentials; $client.DownloadFile($a, $f)}" ""%2"" ""%1""
++    powershell -Command "& {param($a,$f) $client = New-Object System.Net.WebClient; [Net.ServicePointManager]::SecurityProtocol = 'tls12' ; $client.Proxy.Credentials =[System.Net.CredentialCache]::DefaultNetworkCredentials; $client.DownloadFile($a, $f)}" ""%2"" ""%1""
+     SET RC=%ERRORLEVEL%
+     goto EXITRC
+)
+
+(comment "Esto es reemplazar el protocolo de seguridad para poder instalar el interpretador")
+
+
+(comment "Al igual que en Ruby hay que especificar si se quiere obtener el resultado con coma flotante hay que indicarlo")
+
+(+ 2 3) ; Resultado 5, Clojure aplica la metodología prefix, el operador va antes de los operandos. Ruby, Java, Python y otros usan infix = 2 + 5 + 3 + 4 - 5
+(+) ; 0
+(- 5 3) ; 2
+(* 5 5 2) ; 50
+(*) ; 1
+(/ 10 2) ; 5
+(/ 1 5) ; 1/5
+(/ 1.0 5.0); 0.2
+(- (+ 1 (* 2 3)) (/ 4 5.0)); =>6.2 ; En infix notation 1 + 2 * 3 - 4 / 5
+(/ (- (* (+ 1 2) 3) 4) 5) ; => En infix notation ((1 + 2) * 3 - 4) / 5
+0X1D; 29
+
+(comment Strings)
+
+(str "Hola mundo") ; => Hola mundo
+(str "Hola mundo" "Soy Diego") ; => Hola mundoSoy Diego
+(str "Puedo escribir en Hexadecimal Octal y Binario Por ejemplo, 0X1D es " 0X1D " en decimal") ; Puedo escribir en Hexadecimal Octal y Binario Por ejemplo, 0X1D es 29 en decimal
+(str " Esto es una cadena
+String en varias lineas") ; Esto es una cadena\nString en varias lineas
+
+(count "Hola"); 4, cuenta los caracteres de la cadena
+(count (str "Hola mundo" (* 10 10))); 13
+
+(comment comparar Strings)
+
+(= "Hola mundo" "Hola mundo"); true
+(= "Hola mundo" "Diego" "Diego"); false
+(= 5 5 5 (+ 4 1)); true
+(= 13 (count (str "Hola mundo" (* 10 10)))); true
+
+(comment substring)
+
+(subs "Hola" 0); Imprime desde el primer caracter => Hola
+(subs "Hola" 2); Imprime desde el tercer caracter => la
+(subs "Hola" 4); Error fuera de límites
+(subs "Hola" 0 1); => H
+(subs "Hola" 0 2); => Ho
+(subs "Hola" 0 3); => Hol
+
