@@ -97,6 +97,13 @@ String en varias lineas") ; Esto es una cadena\nString en varias lineas
 
 ;;;; <<let>> es un símbolo <<built in>> de Clojure que usado como "operador" o "instrucción a ejecutar" permite definir nuestros propios símbolos.
 
+(let [M "De esta cadena String voy a sacar el último caracter"] (subs M (- (count M) 1)))
+
+(let [a (* 10 5) b a c (- 10 5)] b) ; 50
+(let [a (* 10 5) b a c (- 10 5)] (println "a = " a "b =" b "c = " c)) ; a=50 b=50 c=5
+
+;;;;; Los let se pueden nested anidar y los símbolos de los let anidados pueden acceder a los símbolos de los let a su alrededor. Lo contrario, es decir que un let trate de acceder al let anidado produce un error.
+
 
 
 
