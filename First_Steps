@@ -89,6 +89,14 @@ String en varias lineas") ; Esto es una cadena\nString en varias lineas
 (subvec [1 2 3 4 5] 0 2); [1 2]
 (subvec [1 2 3 4 5] 1); [2 3 4 5]
 
+(comment SÍMBOLOS)
+
+(let [a 5] a) ; 5
+(let [a 5 b 6 d "Hola"] (println d " - " a " y " b)) ; Hola - 5 y 6
+(let [a 2 b 2 c 10] (println "La suma de " a b c " da un total de " (+ a b c))); La suma de 2 2 10 da un total de 14
+
+;;;; <<let>> es un símbolo <<built in>> de Clojure que usado como "operador" o "instrucción a ejecutar" permite definir nuestros propios símbolos.
+
 
 
 
