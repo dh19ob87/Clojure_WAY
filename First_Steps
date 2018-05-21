@@ -59,3 +59,43 @@ String en varias lineas") ; Esto es una cadena\nString en varias lineas
 (subs "Hola" 0 2); => Ho
 (subs "Hola" 0 3); => Hol
 
+;;;;; Existen cuatro colecciones en Clojure Vectores [1 2 3 4 5] estos se guardan en orden y se pueden repetir, conjuntos #{1 2 3 4 "a" "b" 0X1D} Estos se guardan en desorden y no se pueden repetir, map {:perro "Luna", :edad 45, :apodos ["Lulu" "Nana"]}
+
+(count [1 2 3 4 5 [1 2 3 4] "Diego"]) ; 7 elementos del array
+(count #{1 2 3 4 5 6}) ; 6 elementos
+(count {:perro "wuf", :gato "Miau", :ave "pio"}); 3 elementos
+
+; Agregar elementos a una colección
+
+(conj [1 2 3 4] 5 6 7); [1 2 3 4 5 6 7]
+(conj #{"Diego" "Hernando" [1 2 3]} [1 2 3]); no lo agrega porque está repetido pero tampoco advierte #{"Diego" "Hernando" [1 2 3]}
+(conj #{"Diego" "Hernando" [1 2 3]} [1 2 4]); #{"Diego" "Hernando" [1 2 3] [1 2 4]}
+(conj {:perro 3, :gato 5, :ave 7} {:caballo 9}); {:perro 3, :gato 5, :ave 7, :caballo 9}
+
+; Cuando se trata de map si la key que se desea agregar se encuentra repetida ocurre una actualización
+(conj {:perro 3, :gato 6} {:perro "Wuuf"}); {:perro, "wuuf", :gato 6}
+
+; Eliminar elementos de un vector
+
+(nth [1 2 3 4 5] 0); El segundo operando indica el índice del arreglo que se desea obtener o remover.
+
+(nth "Sacando el último caracter de ésta cadena" (- (count "Sacando el último caracter de ésta cadena") 1) ); \a
+(nth "Sacando el último caracter de ésta cadena" (- (count "Sacando el último caracter de ésta cadena") 2) ); \n
+
+(last "Sacando el último caracter de ésta cadena"); \a
+
+;;;; Sacando subcolecciones
+
+(subvec [1 2 3 4 5] 0 2); [1 2]
+(subvec [1 2 3 4 5] 1); [2 3 4 5]
+
+
+
+
+
+
+
+
+
+
+
