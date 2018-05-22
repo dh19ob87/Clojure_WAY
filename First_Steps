@@ -104,8 +104,14 @@ String en varias lineas") ; Esto es una cadena\nString en varias lineas
 
 ;;;;; Los let se pueden nested anidar y los símbolos de los let anidados pueden acceder a los símbolos de los let a su alrededor. Lo contrario, es decir que un let trate de acceder al let anidado produce un error.
 
+(comment por ejemplo la siguiente instrucción produce error porque se trata de acceder a un símbolo, b, desde un let no anidado)
 
+(let [a 1] (let [b 5]) b); se dice que b en el primer let se encuentra fuera de contexto, sin embargo, sí puedo acceder a desde el let anidado
+(let [a 1] (let [b "Valor"] a)); 1
 
+; Caso especial es cuando se usan dos let pero con símbolos de mismo nombre, en este caso se considera un update
+
+(let [a 2 b 5 c 6] (let [b "Update"] b)); "Update" Sin embargo también depende del contexto porque si requiero b desde el let externo obtengo 5
 
 
 
